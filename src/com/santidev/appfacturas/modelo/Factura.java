@@ -68,31 +68,31 @@ public class Factura {
     }
 
     public String generarDetalle() {
+
+        SimpleDateFormat df = new SimpleDateFormat("dd 'de' MMMM, yyyy");
         StringBuilder sb = new StringBuilder("Factura No: ");
+        sb.append("Fecha Emisión:").append(df.format(this.fecha))
+                .append("\n");
         sb.append(id)
                 .append("\nCliente: ")
                 .append(this.cliente.getNombre())
-                .append("\t RFC: ")
+                .append("\t\t RFC: ")
                 .append(cliente.getRfc())
                 .append("\nDescripción: ")
                 .append(this.descripcion)
                 .append("\n")
-                .append("\n#\tNombre\t$\tCant.\tTotal\n");
+                .append("\n#\t\tNombre\t\t$\t\tCant.\t\tTotal\n");
 
-        SimpleDateFormat df = new SimpleDateFormat("dd 'de' MMMM, yyyy");
-
-        sb.append("Fecha Emisión:").append(df.format(this.fecha))
-                .append("\n");
 
         for (ItemFactura item: this.items) {
             sb.append(item.getProducto().getCodigo())
-                    .append("\t")
+                    .append("\t\t")
                     .append(item.getProducto().getNombre())
-                    .append("\t")
+                    .append("\t\t")
                     .append(item.getProducto().getPrecio())
-                    .append("\t")
+                    .append("\t\t")
                     .append(item.getCantidad())
-                    .append("\t")
+                    .append("\t\t")
                     .append(item.calcularImporte())
                     .append("\n");
         }
